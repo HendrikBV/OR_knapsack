@@ -16,6 +16,10 @@ namespace KP
 		std::chrono::duration<double, std::ratio<1, 1>> elapsed_time;
 
 		// Initialize
+		size_t _nodes_explored = 0;
+		std::vector<int> _items_x; // current solution
+		std::vector<bool> _items_fixed; // current branching restrictions
+
 		_best_solution.reserve(_items.size());
 		for (size_t i = 0; i < _items.size(); ++i)
 		{

@@ -87,22 +87,26 @@ namespace KP
 		_output.set_on(true);
 		_output << "\n\nThe optimal solution is:";
 		_output << "\n\tz = " << stages[_capacity].best_profit << "\n";
-		int64_t residualcap = _capacity;
 
-		int minweight = std::numeric_limits<int>::max();
-		for (auto&& i : _items)
-			if (i.weight < minweight)
-				minweight = i.weight;
-
-		while (residualcap >= minweight)
+		if (_items.size() <= 20)
 		{
-			if (stages[residualcap].best_item >= 0)
-				_best_solution[stages[residualcap].best_item] = 1;
-			residualcap -= _items[stages[residualcap].best_item].weight;
+			int64_t residualcap = _capacity;
+
+			int minweight = std::numeric_limits<int>::max();
+			for (auto&& i : _items)
+				if (i.weight < minweight)
+					minweight = i.weight;
+
+			while (residualcap >= minweight)
+			{
+				if (stages[residualcap].best_item >= 0)
+					_best_solution[stages[residualcap].best_item] = 1;
+				residualcap -= _items[stages[residualcap].best_item].weight;
+			}
+			if (_items.size() <= 10)
+				for (size_t j = 0; j < _items.size(); ++j)
+					_output << "\tx[" << j + 1 << "] = " << _best_solution[j];
 		}
-		if (_items.size() <= 10)
-			for (size_t j = 0; j < _items.size(); ++j)
-				_output << "\tx[" << j + 1 << "] = " << _best_solution[j];
 
 		elapsed_time = std::chrono::system_clock::now() - start_time;
 		_output << "\n\nComputation time (s): " << elapsed_time.count();
@@ -226,12 +230,16 @@ namespace KP
 		// reconstruct solution
 		_output.set_on(true);
 		_output << "\n\n\nThe optimal solution has been identified.\n\tz = " << bestprofit;
-		_output << "\n\tx[1] = " << amount_item1;
-		int available = _capacity - amount_item1 * _items[0].weight;
-		for (int stage = 1; stage < _items.size(); ++stage)
+
+		if (_items.size() <= 20)
 		{
-			_output << "\tx[" << stage + 1 << "] = " << states[stage][available].amount;
-			available -= states[stage][available].amount * _items[stage].weight;
+			_output << "\n\tx[1] = " << amount_item1;
+			int available = _capacity - amount_item1 * _items[0].weight;
+			for (int stage = 1; stage < _items.size(); ++stage)
+			{
+				_output << "\tx[" << stage + 1 << "] = " << states[stage][available].amount;
+				available -= states[stage][available].amount * _items[stage].weight;
+			}
 		}
 
 		elapsed_time = std::chrono::system_clock::now() - start_time;

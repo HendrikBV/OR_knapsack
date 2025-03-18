@@ -77,11 +77,6 @@ namespace KP // knapsack
 
 	class BranchAndBound : public Algorithm
 	{
-		size_t _nodes_explored;
-
-		std::vector<int> _items_x;
-		std::vector<bool> _items_fixed;
-
 	public:
 		void run(bool verbose) override;
 	};
