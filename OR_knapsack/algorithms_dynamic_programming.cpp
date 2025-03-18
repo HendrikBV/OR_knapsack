@@ -174,8 +174,8 @@ namespace KP
 						int residualcap = available - amountcurrent * _items[stage].weight;
 						int profit = amountcurrent * _items[stage].value + states[stage + 1][residualcap].bestprofit;
 
-						_output << "\nAls we x[" << stage + 1 << "] = " << amountcurrent << " zetten, dan is de restcapaciteit " << residualcap;
-						_output << "\nDe profit wordt dan " << amountcurrent << " * " << _items[stage].value << " + f_" << stage + 2 << "(" << residualcap << ") = " << profit;
+						_output << "\nIf we set x[" << stage + 1 << "] = " << amountcurrent << ", then the residual capacity is " << residualcap;
+						_output << "\nThe profit is then " << amountcurrent << " * " << _items[stage].value << " + f_" << stage + 2 << "(" << residualcap << ") = " << profit;
 
 						if (profit > states[stage][available].bestprofit)
 						{
@@ -230,9 +230,11 @@ namespace KP
 		int available = _capacity - amount_item1 * _items[0].weight;
 		for (int stage = 1; stage < _items.size(); ++stage)
 		{
-			_output << "\n\tx[" << stage + 1 << "] = " << states[stage][available].amount;
+			_output << "\tx[" << stage + 1 << "] = " << states[stage][available].amount;
 			available -= states[stage][available].amount * _items[stage].weight;
 		}
 
+		elapsed_time = std::chrono::system_clock::now() - start_time;
+		_output << "\n\nComputation time (s): " << elapsed_time.count();
 	}
 }
