@@ -1,0 +1,14 @@
+KP_10_weakly_correlated
+capacity	1896
+nb_items	10
+item	value	weight
+0	843	937
+1	999	965
+2	146	198
+3	95	59
+4	545	533
+5	348	275
+6	513	435
+7	331	241
+8	46	89
+9	84	61

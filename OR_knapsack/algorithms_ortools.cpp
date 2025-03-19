@@ -120,10 +120,14 @@ namespace KP
 			std::cout << "\nElapsed time (s): " << elapsed_time_IP.count();
 
 			std::cout << "\nObjective value = " << _best_value;
-			std::cout << "\nItems selected: ";
-			for (auto j = 0; j < _items.size(); ++j)
-				if (_best_solution[j] > 0)
-					std::cout << j + 1 << " ";
+
+			if (_items.size() <= 20)
+			{
+				std::cout << "\nItems selected: ";
+				for (auto j = 0; j < _items.size(); ++j)
+					if (_best_solution[j] > 0)
+						std::cout << j + 1 << " ";
+			}
 		}
 	}
 
