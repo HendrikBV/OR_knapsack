@@ -150,7 +150,7 @@ namespace KP // knapsack
 	};
 
 
-} // namespace MS
+} // namespace KP
 
 
 #endif // !ALGORITHMS_KP_H
