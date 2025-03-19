@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ALGORITHMS_MS_H
-
+#ifndef ALGORITHMS_KP_H
+#define ALGORITHMS_KP_H
 
 
 #include <exception>
@@ -153,4 +153,4 @@ namespace KP // knapsack
 } // namespace MS
 
 
-#endif // !ALGORITHMS_MS_H
+#endif // !ALGORITHMS_KP_H
