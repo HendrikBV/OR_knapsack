@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
 		auto result = options.parse(argc, argv);
 
-		if (argc <= 1 || result.count("help"))
+		if (argc <= 1 || result.count("help")) 
 		{
 			std::cout << options.help() << "\n\n\n\n\n";
 			return EXIT_SUCCESS;
